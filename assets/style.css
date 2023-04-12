@@ -1,0 +1,13 @@
+header {
+	display: flex;
+	justify-content: space-between;
+	padding: 20px;
+}
+
+.input-group {
+	width: 350px;
+}
+
+.input-group > .form-control {
+	height: 42px;
+}
