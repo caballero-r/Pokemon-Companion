@@ -40,3 +40,13 @@ buttonEl.addEventListener('click', function () {
 			alert(error.message)
 		})
 })
+
+// added embedded youtube player with video that plays pokemon themed music
+function youtubePlayer() {
+	var player = document.getElementById('player')
+	player.innerHTML = `<iframe width="500" height="350"
+src="https://www.youtube.com/embed/YMEblRM4pGc?autoplay=1&mute=1">
+</iframe>`;
+}
+
+youtubePlayer()
