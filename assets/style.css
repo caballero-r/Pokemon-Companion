@@ -1,7 +1,25 @@
 header {
 	display: flex;
 	justify-content: space-between;
-	padding: 20px;
+	align-items: center;
+	background-color: #ff0000;
+	color: #ffde00;
+	padding: 10px;
+}
+
+h1 {
+	display: flex;
+	text-align: center;
+	justify-content: center;
+	align-content: center;
+	flex-wrap: wrap;
+	font-family: Lato, sans-serif;
+	padding-bottom: 10px;
+}
+
+#rando {
+	border-radius: 5px;
+	padding: 10px;
 }
 
 .input-group {
@@ -10,4 +28,50 @@ header {
 
 .input-group > .form-control {
 	height: 42px;
+}
+
+.input-group .btn,
+#rando {
+	background-color: black;
+	color: white;
+	border: none;
+}
+
+/* This section deals with the container when the search button is clicked */
+.container {
+	display: grid;
+	/* grid-template-areas:
+		'section1 poke-info poke-info section2'
+		'section1 poke-info poke-info section2'
+		'player descript descript section2'; */
+}
+
+#section1 {
+	grid-column: 1 / span 1;
+	grid-row: 1 / span 3;
+	border: 1px solid black;
+}
+
+.poke-info {
+	grid-column: 2 / span 2;
+	grid-row: 1 / span 2;
+	border: 1px solid black;
+}
+
+#section2 {
+	grid-column: 4 / span 1;
+	grid-row: 1 / span 3;
+	border: 1px solid black;
+}
+
+#descript {
+	grid-column: 2 / span 2;
+	grid-row: 3 / span 1;
+	border: 1px solid black;
+}
+
+#player {
+	grid-column: 1 / span 1;
+	grid-row: 3 / span 1;
+	border: 1px solid black;
 }
