@@ -8,9 +8,13 @@ var attacksEl = document.getElementById('attacks')
 var evolutionEl = document.querySelector('#section2 ul')
 var descriptionEl = document.getElementById('descript')
 var randoEl = document.getElementById("rando")
+var siteDescEl = document.querySelector(".site-description")
+var pokeInfoEl = document.querySelector(".poke-info")
 
 //Return  ' Please enter the name of a Pokemon. ' if leave empty
 buttonEl.addEventListener('click', function () {
+	siteDescEl.classList.add('hide');
+	pokeInfoEl.classList.remove('hide');
 	pokemon = searchEl.value.toLowerCase().trim()
 	if (pokemon === '') {
 		alert('Please enter the name of a Pokemon.')

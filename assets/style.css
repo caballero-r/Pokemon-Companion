@@ -1,20 +1,27 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+
 header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
 	background-color: #ff0000;
 	color: #ffde00;
+	border-bottom: 7px solid black;
 	padding: 10px;
 }
 
 h1 {
-	display: flex;
 	text-align: center;
-	justify-content: center;
-	align-content: center;
-	flex-wrap: wrap;
-	font-family: Lato, sans-serif;
-	padding-bottom: 10px;
+}
+
+.search {
+	display: flex;
+	justify-content: space-between;
+	padding: 10px 10px 0 10px;
+}
+
+.site-description {
+	text-align: center;
 }
 
 #rando {
@@ -38,40 +45,41 @@ h1 {
 }
 
 /* This section deals with the container when the search button is clicked */
-.container {
-	display: grid;
-	/* grid-template-areas:
-		'section1 poke-info poke-info section2'
-		'section1 poke-info poke-info section2'
-		'player descript descript section2'; */
-}
-
-#section1 {
-	grid-column: 1 / span 1;
-	grid-row: 1 / span 3;
-	border: 1px solid black;
-}
 
 .poke-info {
-	grid-column: 2 / span 2;
-	grid-row: 1 / span 2;
-	border: 1px solid black;
+	display: flex;
+	margin: 0 40px 0 40px;
+	height: 700px;
 }
 
-#section2 {
-	grid-column: 4 / span 1;
-	grid-row: 1 / span 3;
+.content-left {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	border: 1px solid black;
+	width: 25%;
 }
 
-#descript {
-	grid-column: 2 / span 2;
-	grid-row: 3 / span 1;
+.content-middle {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	border: 1px solid black;
+	width: 50%;
 }
 
-#player {
-	grid-column: 1 / span 1;
-	grid-row: 3 / span 1;
+.content-right {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	border: 1px solid black;
+	width: 25%;
+}
+
+.show {
+	display: block;
+}
+
+.hide {
+	display: none;
 }

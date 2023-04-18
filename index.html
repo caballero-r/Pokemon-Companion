@@ -29,10 +29,16 @@
 	<body>
 		<!-- Main Title and Search Bar -->
 		<header>
+		
+			<h1 class="title">Pokemon Companion</h1>
+			
+		</header>
+
+		<nav class="search">
 			<div>
 				<button id="rando">Get Random Pokemon!</button>
 			</div>
-			<h1 class="title">Pokemon Companion</h1>
+
 			<div class="input-group mb-3">
 				<input
 					type="text"
@@ -50,7 +56,7 @@
 					<i class="fas fa-search"></i>
 				</button>
 			</div>
-		</header>
+		</nav>
 
 		<main>
 			<!-- This landing page -->
@@ -62,29 +68,30 @@
 			</section>
 
 			<!-- This appears after search button is clicked -->
-			<div class="container">
-				<section class="poke-info">
-					<h2 id="poke-name"></h2>
-					<img src="" alt="" id="poke-sprite" />
-				</section>
-
-				<section id="section1">
+			<div class="poke-info hide">
+				
+				<section class="content-left">
 					<h2>Move List</h2>
 					<ul id="attacks"></ul>
 				</section>
 
-				<section id="section2">
+				<section class="content-middle">
+					<h2 id="poke-name"></h2>
+					<img src="" alt="" id="poke-sprite" />
+
+					<div id="descript">
+						<h2>Hello World</h2>
+					</div>
+				</section>
+
+				<section class="content-right">
 					<h2>Evolution Chart</h2>
 					<ul></ul>
+					<div id="player">
+						<h2></h2>
+					</div>
 				</section>
 
-				<section id="descript">
-					<h2>Hello World</h2>
-				</section>
-
-				<div id="player">
-					<h2></h2>
-				</div>
 			</div>
 		</main>
 
