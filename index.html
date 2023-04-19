@@ -23,20 +23,20 @@
 			crossorigin="anonymous"
 		/>
 		<link rel="stylesheet" href="assets/style.css" />
-		<title>Pokemon Companion</title>
+		<title>Pokémon Companion</title>
 	</head>
 
 	<body>
 		<!-- Main Title and Search Bar -->
 		<header>
 		
-			<h1 class="title">Pokemon Companion</h1>
+			<h1 class="title">Pokémon Companion</h1>
 			
 		</header>
 
 		<nav class="search">
 			<div>
-				<button id="rando">Get Random Pokemon!</button>
+				<button id="rando">Get Random Pokémon!</button>
 			</div>
 
 			<div class="input-group mb-3">
@@ -61,10 +61,9 @@
 		<main>
 			<!-- This landing page -->
 			<section class="site-description">
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus eum
-				incidunt tempore magnam eaque quia reprehenderit dolore. Voluptatibus
-				voluptas maiores earum ipsam distinctio, hic numquam iure quisquam,
-				fugiat soluta aliquid?
+				<p>
+					Search the name or number of a Pokémon!
+				</p>
 			</section>
 
 			<!-- This appears after search button is clicked -->
@@ -77,8 +76,9 @@
 
 				<section class="content-middle">
 					<h2 id="poke-name"></h2>
-					<img src="" alt="" id="poke-sprite" />
-
+					<div style="background-image: url('assets/images/Pokeball-PNG-Images.png') ; background-size: 400px;">
+						<img src="" alt="" id="poke-sprite">
+					</div>
 					<div id="descript">
 						<h2>Hello World</h2>
 					</div>
@@ -87,10 +87,13 @@
 				<section class="content-right">
 					<h2>Evolution Chart</h2>
 					<ul></ul>
-					<div id="player">
-						<h2></h2>
-					</div>
 				</section>
+
+				<button id="music" type="button" class="btn btn-warning">
+					Hide/Show Player
+					<div id="player" class='hide'>
+					</div>
+				</button>
 
 			</div>
 		</main>
