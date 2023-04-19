@@ -24,6 +24,14 @@ h1 {
 	text-align: center;
 }
 
+.site-description p {
+	position: relative;
+	top: 200px;
+	font-size: 24px;
+	display: inline-block;
+	width: 800px;
+}
+
 #rando {
 	border-radius: 5px;
 	padding: 10px;
@@ -43,6 +51,8 @@ h1 {
 	color: white;
 	border: none;
 }
+
+
 
 /* This section deals with the container when the search button is clicked */
 
@@ -68,12 +78,34 @@ h1 {
 	width: 50%;
 }
 
+#descript {
+	padding: 0 20px;
+}
+
+#poke-sprite {
+	width: 400px;
+	height: 400px;
+  	-webkit-filter: drop-shadow(5px 5px 5px #222);
+  	filter: drop-shadow(5px 5px 5px #222);
+}
+
 .content-right {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	border: 1px solid black;
 	width: 25%;
+}
+
+#music {
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	border: 2px solid black;
+}
+
+h2 {
+	padding: 15px 0 ;
 }
 
 .show {
