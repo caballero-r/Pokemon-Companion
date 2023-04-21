@@ -81,37 +81,40 @@
 
 		<main>
 			<!-- This landing page -->
-			<section class="site-description">
+			<section class="site-description container">
 				<p>Search the name or number of a Pokémon!</p>
+				<img class="opacity-50" src="assets/images/755.png" alt="" />
 			</section>
 
 			<!-- This appears after search button is clicked -->
-			<div class="poke-info hide">
-				<section class="content-left">
-					<h2>Move List</h2>
-					<ul id="attacks"></ul>
-				</section>
+			<div class="poke-info container-fluid hide">
+				<div class="row">
+					<section class="content-left col-md border border-2 rounded shadow-3-strong mb-5 ms-1">
+						<h2>Move List</h2>
+						<ul id="attacks"></ul>
+					</section>
 
-				<section class="content-middle">
-					<h2 id="poke-name"></h2>
-					<div
-						style="
-							background-image: url('assets/images/Pokeball-PNG-Images.png');
-							background-size: 400px;
-						"
-					>
-						<img src="" alt="" id="poke-sprite" />
-					</div>
-					<div id="descript">
-						<h2>Hello World</h2>
-					</div>
-				</section>
+					<section class="content-middle col-md-6 border border-2 rounded shadow-3-strong mb-5 mx-1 ">
+						<h2 id="poke-name"></h2>
+						<div
+							class="bg-image p-5 text-center shadow-1-strong rounded mb-5"
+							style="
+								background-image: url('assets/images/Pokeball-PNG-Images.png');
+								background-size: 400px;
+							"
+						>
+							<img src="" alt="" id="poke-sprite" />
+						</div>
+						<div id="descript">
+							<h2>Hello World</h2>
+						</div>
+					</section>
 
-				<section class="content-right">
-					<h2>Evolution Chart</h2>
-					<ul></ul>
-				</section>
-
+					<section class="content-right col-md border border-2 rounded shadow-3-strong mb-5 me-1 ">
+						<h2>Evolution Chart</h2>
+						<ul></ul>
+					</section>
+				</div>
 				<button id="music" type="button" class="btn btn-warning">
 					Hide/Show Player
 					<div id="player" class="hide"></div>
