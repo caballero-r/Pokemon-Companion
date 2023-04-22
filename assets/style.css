@@ -4,7 +4,7 @@
 }
 
 header {
-	background-color: #ff0000;
+	background-color: #ff3838;
 	color: #ffde00;
 	border-bottom: 7px solid black;
 	padding: 10px;
@@ -52,49 +52,19 @@ h1 {
 	border: none;
 }
 
-
-
 /* This section deals with the container when the search button is clicked */
 
-.poke-info {
-	display: flex;
-	margin: 0 40px 0 40px;
-	height: 700px;
+#poke-sprite,
+.site-description img {
+	width: 350px;
+	height: 350px;
+	-webkit-filter: drop-shadow(5px 5px 5px #222);
+	filter: drop-shadow(5px 5px 5px #222);
 }
 
-.content-left {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	border: 1px solid black;
-	width: 25%;
-}
-
-.content-middle {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	border: 1px solid black;
-	width: 50%;
-}
-
-#descript {
-	padding: 0 20px;
-}
-
-#poke-sprite {
-	width: 400px;
-	height: 400px;
-  	-webkit-filter: drop-shadow(5px 5px 5px #222);
-  	filter: drop-shadow(5px 5px 5px #222);
-}
-
-.content-right {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	border: 1px solid black;
-	width: 25%;
+.site-description img {
+	z-index: -1;
+	position: relative;
 }
 
 #music {
@@ -105,7 +75,7 @@ h1 {
 }
 
 h2 {
-	padding: 15px 0 ;
+	padding: 15px 0;
 }
 
 .show {
