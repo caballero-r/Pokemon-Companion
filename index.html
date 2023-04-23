@@ -89,13 +89,18 @@
 			<!-- This appears after search button is clicked -->
 			<div class="poke-info container-fluid hide">
 				<div class="row">
-					<section class="content-left col-md border border-2 rounded shadow-3-strong mb-5 ms-1">
-						<h2>Move List</h2>
+					<section class="col-md border border-2 rounded shadow-3-strong mb-5 ms-1">
+						<div class="content border-2 rounded shadow-2-strong p-1">
+						<h2>Featured Attacks</h2>
+						</div>
 						<ul id="attacks"></ul>
 					</section>
 
-					<section class="content-middle col-md-6 border border-2 rounded shadow-3-strong mb-5 mx-1 ">
-						<h2 id="poke-name"></h2>
+					<section class="col-md-6 border border-2 rounded shadow-3-strong mb-5 mx-1 ">
+						<div class="content border-2 rounded shadow-2-strong p-1">
+							<h2 id="poke-name"></h2>
+						</div>
+						<img src="" alt="" id="poke-type">
 						<div
 							class="bg-image p-5 text-center shadow-1-strong rounded mb-5"
 							style="
@@ -105,13 +110,17 @@
 						>
 							<img src="" alt="" id="poke-sprite" />
 						</div>
+						<div class="content border-2 rounded shadow-2-strong p-1">
+							<h2>Featured Ability</h2>
+						</div>
 						<div id="descript">
-							<h2>Hello World</h2>
 						</div>
 					</section>
 
-					<section class="content-right col-md border border-2 rounded shadow-3-strong mb-5 me-1 ">
-						<h2>Evolution Chart</h2>
+					<section class="evolution col-md border border-2 rounded shadow-3-strong mb-5 me-1 ">
+						<div class="content border-2 rounded shadow-2-strong p-1">
+							<h2>Evolution</h2>
+						</div>
 						<ul></ul>
 					</section>
 				</div>

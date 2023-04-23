@@ -10,8 +10,21 @@ header {
 	padding: 10px;
 }
 
+.title, h2, h3 {
+	-webkit-filter: drop-shadow(5px 5px 5px #222);
+	filter: drop-shadow(5px 5px 5px #222);
+}
+
 h1 {
 	text-align: center;
+}
+
+h2, h3 {
+	color: #ffde00;
+}
+
+.content {
+	background-color: #ff3838;
 }
 
 .search {
@@ -61,6 +74,7 @@ h1 {
 	-webkit-filter: drop-shadow(5px 5px 5px #222);
 	filter: drop-shadow(5px 5px 5px #222);
 }
+
 
 .site-description img {
 	z-index: -1;
