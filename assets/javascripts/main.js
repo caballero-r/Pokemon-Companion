@@ -5,38 +5,78 @@ var buttonEl = document.getElementById('button-addon2')
 var searchEl = document.getElementById('search-input')
 var spriteEl = document.getElementById('poke-sprite')
 var attacksEl = document.getElementById('attacks')
-var evolutionEl = document.querySelector('.content-right ul')
+var evolutionEl = document.querySelector('.evolution ul')
 var descriptionEl = document.getElementById('descript')
 var randoEl = document.getElementById("rando")
 var siteDescEl = document.querySelector(".site-description")
 var pokeInfoEl = document.querySelector(".poke-info")
 var musicButtonEl = document.getElementById("music")
+var historyButton = document.getElementById('history');
+var historyList = document.getElementById('search-history');
+var musicButton = document.getElementById('music');
+var musicPlayer = document.getElementById('player');
+var historyBtn = document.querySelector('#history');
 
+//get existing history element
+var pastSearches = [];
+var pastSearchesEl = document.getElementById("history");
+function displayPastSearches() {
+  pastSearchesEl.innerHTML = "";
+  pastSearches.forEach((search) => {
+    var pastSearchItem = document.createElement("p");
+    pastSearchItem.textContent = search;
+  });
+}
+//recall searched pokemon and show data
+function recallPokemon(index) {
+  const pokemonName = pastSearches[index];
+  getPokemon(pokemonName);
+}
+pastSearchesEl.addEventListener("click", function (event) {
+  const target = event.target;
+  if (target.tagName.toLowerCase() === "p") {
+    const index = Array.from(pastSearchesEl.children).indexOf(target);
+    recallPokemon(index);
+  }
+});
 
-
-musicButtonEl.addEventListener('click', function () {
-		var musicPlayerEl = document.getElementById('player');
-		if (musicPlayerEl.style.display === "none") {
-		  	musicPlayerEl.style.display = "block";
-		} else {
-			musicPlayerEl.style.display = "none";
-		}
-
-})
-
-//Return  ' Please enter the name of a Pokemon. ' if leave empty
+//Return  'Please enter the name of a Pokemon.' if leave empty
 buttonEl.addEventListener('click', function () {
   siteDescEl.classList.add('hide');
   pokeInfoEl.classList.remove('hide');
   pokemon = searchEl.value.toLowerCase().trim()
   if (pokemon === '') {
+    resetToDefaultPage();
     alert('Please enter the name of a Pokemon.')
-    return
+    return;
   }
+  displayPastSearches();
   getPokemon(pokemon)
 })
+function addToSearchHistory(pokemon) {
+  // Check if the Pokemon already exists in the search history
+  const pokemonExists = pastSearches.some(
+    (search) => search.toLowerCase() === pokemon.toLowerCase()
+  );
+  // If the Pokemon does not exist in the search history, add it
+  if (!pokemonExists) {
+    pastSearches.push(pokemon);
+    displayPastSearches();
+  }
+}
+//reset the page elements to their original state
+function resetToDefaultPage() {
+  siteDescEl.classList.remove("hide");
+  pokeInfoEl.classList.add("hide");
+  searchEl.value = "";
+  attacksEl.innerHTML = "";
+  evolutionEl.innerHTML = "";
+  descriptionEl.innerHTML = "";
+  pokemonEl.textContent = "";
+  spriteEl.removeAttribute("src");
+}
+// Return 'Pokemon does not exist.' if no response match
 function getPokemon(poke) {
-  // Return 'Pokemon does not exist.' if no response match
   fetch(`https://pokeapi.co/api/v2/pokemon/${poke}/`)
     .then((response) => {
       if (!response.ok) {
@@ -47,16 +87,48 @@ function getPokemon(poke) {
     .then((data) => {
       attacksEl.innerHTML = "";
       var pokeName = data.name;
-      pokemonEl.textContent = pokeName;
-      spriteEl.setAttribute("src", data.sprites.front_default);
+      pokemonEl.textContent = capitalizeFirstLetter(pokeName);
+      spriteEl.setAttribute("src", data.sprites.other['official-artwork'].front_default);
       populateMoveList(data);
       populateEvolutionChart(data);
+      addToSearchHistory(pokemon);
       populateDesc(data);
     })
     .catch((error) => {
       alert(error.message);
     });
 }
+//get existing history element
+var pastSearches = [];
+var pastSearchesEl = document.getElementById("history");
+function displayPastSearches() {
+  pastSearchesEl.innerHTML = "";
+  pastSearches.forEach((search) => {
+    var pastSearchItem = document.createElement("p");
+    pastSearchItem.textContent = search;
+    pastSearchesEl.appendChild(pastSearchItem);
+  });
+}
+historyBtn.addEventListener('click', showHistory);
+function showHistory() {
+  const searchHistory = JSON.parse(localStorage.getItem('searchHistory'));
+  if (searchHistory && searchHistory.length > 0) {
+    const modal = document.createElement('div');
+    modal.classList.add('modal');
+    const modalContent = document.createElement('div');
+    modalContent.classList.add('modal-content');
+    searchHistory.forEach((pokemon, index) => {
+      const pokemonBtn = document.createElement('button');
+      pokemonBtn.classList.add('pokemon-btn');
+      pokemonBtn.textContent = pokemon.name;
+      pokemonBtn.addEventListener('click', () => recallPokemon(index));
+      modalContent.appendChild(pokemonBtn);
+    });
+    modal.appendChild(modalContent);
+    document.body.appendChild(modal);
+  }
+}
+//Get pokemon's Move list
 function populateMoveList(item) {
   for (let i = 0; i < 5; i++){
     fetch(item.moves[i].move.url)
@@ -71,6 +143,7 @@ function populateMoveList(item) {
       });
   }
   }
+//Get pokemon's ability
 function populateEvolutionChart(item) {
   const pokeId = item.id
   fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokeId + 1}/`)
@@ -89,33 +162,15 @@ function populateEvolutionChart(item) {
       }
     })
 }
-/*function populateDesc(item) {
-  const pokeId = item.id
-  var abilityName = ''
-  fetch(`https://pokeapi.co/api/v2/ability/${pokeId}/`)
-    .then((res) => {
-      return res.json();
-    })
-    .then((descData) => {
-      abilityName = descData.name;
-    var abilityDesc = descData.effect_entries[1].effect;
-    descriptionEl.innerHTML = `<h3>${abilityName}</h3>
-                    <p>${abilityDesc}</p>`
-    })
-    .catch((error) => {
-      descriptionEl.innerHTML = `<h3>${abilityName}</h3>
-                   <p>No description available</p>`;
-    });
-}*/
+ // Check if the Pokemon has an ability listed in the API
 function populateDesc(item) {
   var abilityName = "";
-  // Check if the Pokemon has an ability listed in the API
   if (!item.abilities || item.abilities.length === 0) {
     descriptionEl.innerHTML = `<p>No ability available</p>`;
     return;
   }
-  // Get the ability name from the Pokemon data
-  abilityName = item.abilities[0].ability.name;
+// Get the ability name from the Pokemon data
+abilityName = item.abilities[0].ability.name;
   fetch(`https://pokeapi.co/api/v2/ability/${abilityName}/`)
     .then((res) => {
       return res.json();
@@ -141,8 +196,8 @@ randoEl.addEventListener("click", function () {
     attacksEl.innerHTML = "";
       // Display the pokemon's name and sprite
       var pokeName = data.name;
-      pokemonEl.textContent = pokeName;
-    spriteEl.setAttribute("src", data.sprites.front_default);
+      pokemonEl.textContent = capitalizeFirstLetter(pokeName);
+    spriteEl.setAttribute("src", data.sprites.other['official-artwork'].front_default);
      populateMoveList(data);
      populateEvolutionChart(data);
      populateDesc(data);
@@ -151,6 +206,23 @@ randoEl.addEventListener("click", function () {
       alert(error.message);
     });
 });
+
+// Toggle the music player from hide and show
+var isPlayerVisible = false;
+musicButton.addEventListener('click', () => {
+  if (isPlayerVisible) {
+    musicPlayer.classList.add('hide');
+    isPlayerVisible = false;
+  } else {
+    musicPlayer.classList.remove('hide');
+    isPlayerVisible = true;
+  }
+});
+
+// Function created to have the first letter of the string as an upper case letter
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 // added embedded youtube player with video that plays pokemon themed music
 function youtubePlayer() {
   var player = document.getElementById('player')
