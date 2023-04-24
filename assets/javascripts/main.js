@@ -227,12 +227,14 @@ var shiny = false;
 shinyToggle.addEventListener('click', () => {
   if (shiny) {
     shinyEl.classList.add('hide');
-	spriteEl.classList.remove('hide')
+	spriteEl.classList.remove('hide');
     shiny = false;
+	shinyToggle.style.backgroundColor="white";
   } else {
     shinyEl.classList.remove('hide');
-	spriteEl.classList.add('hide')
+	spriteEl.classList.add('hide');
     shiny = true;
+	shinyToggle.style.backgroundColor="#8eebfc";
   }
 });
 
