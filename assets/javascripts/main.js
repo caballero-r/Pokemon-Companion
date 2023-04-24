@@ -137,7 +137,7 @@ function populateMoveList(item) {
       })
       .then((movesData) => {
     const li = document.createElement('li')
-    li.innerHTML = `<h3>${item.moves[i].move.name.toUpperCase()}</h3>
+    li.innerHTML = `<h3>${capitalizeFirstLetter(`${item.moves[i].move.name}`)}</h3>
             <p>${movesData.flavor_text_entries[1].flavor_text}</p>`
       attacksEl.append(li)
       });
@@ -177,7 +177,7 @@ abilityName = item.abilities[0].ability.name;
     })
     .then((descData) => {
       var abilityDesc = descData.effect_entries[1].effect;
-      descriptionEl.innerHTML = `<h3>${abilityName}</h3>
+      descriptionEl.innerHTML = `<h3>${capitalizeFirstLetter(`${abilityName}`)}</h3>
                                   <p>${abilityDesc}</p>`;
     })
     .catch((error) => {
