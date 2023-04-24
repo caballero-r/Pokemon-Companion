@@ -10,21 +10,27 @@ header {
 	padding: 10px;
 }
 
-.title, h2, h3 {
+.title {
 	-webkit-filter: drop-shadow(5px 5px 5px #222);
-	filter: drop-shadow(5px 5px 5px #222);
+	filter: drop-shadow(5px 5px 5px #222);	
+}
+
+h2, h3 {
+	-webkit-filter: drop-shadow(5px 5px 5px #003a70);
+	filter: drop-shadow(5px 5px 5px #003a70);	
 }
 
 h1 {
 	text-align: center;
 }
 
-h2, h3 {
+.title, h2, h3 {
+	margin-top: 5px;
 	color: #ffde00;
 }
 
-.content {
-	background-color: #ff3838;
+ul {
+	padding-top: 5px;
 }
 
 .search {
@@ -88,10 +94,6 @@ h2, h3 {
 	border: 2px solid black;
 }
 
-h2 {
-	padding: 15px 0;
-}
-
 .show {
 	display: block;
 }
@@ -99,3 +101,4 @@ h2 {
 .hide {
 	display: none;
 }
+
