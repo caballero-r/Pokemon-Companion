@@ -4,6 +4,7 @@ var pokemonEl = document.getElementById('poke-name')
 var buttonEl = document.getElementById('button-addon2')
 var searchEl = document.getElementById('search-input')
 var spriteEl = document.getElementById('poke-sprite')
+var shinyEl = document.getElementById('poke-sprite-shiny')
 var attacksEl = document.getElementById('attacks')
 var evolutionEl = document.querySelector('.evolution ul')
 var descriptionEl = document.getElementById('descript')
@@ -14,6 +15,7 @@ var musicButtonEl = document.getElementById("music")
 var historyButton = document.getElementById('history');
 var historyList = document.getElementById('search-history');
 var musicButton = document.getElementById('music');
+var shinyToggle = document.getElementById('shinyToggle');
 var musicPlayer = document.getElementById('player');
 var historyBtn = document.querySelector('#history');
 
@@ -89,6 +91,7 @@ function getPokemon(poke) {
       var pokeName = data.name;
       pokemonEl.textContent = capitalizeFirstLetter(pokeName);
       spriteEl.setAttribute("src", data.sprites.other['official-artwork'].front_default);
+	  shinyEl.setAttribute("src", data.sprites.other['official-artwork'].front_shiny);
       populateMoveList(data);
       populateEvolutionChart(data);
       addToSearchHistory(pokemon);
@@ -198,6 +201,7 @@ randoEl.addEventListener("click", function () {
       var pokeName = data.name;
       pokemonEl.textContent = capitalizeFirstLetter(pokeName);
     spriteEl.setAttribute("src", data.sprites.other['official-artwork'].front_default);
+	shinyEl.setAttribute("src", data.sprites.other['official-artwork'].front_shiny);
      populateMoveList(data);
      populateEvolutionChart(data);
      populateDesc(data);
@@ -216,6 +220,19 @@ musicButton.addEventListener('click', () => {
   } else {
     musicPlayer.classList.remove('hide');
     isPlayerVisible = true;
+  }
+});
+
+var shiny = false;
+shinyToggle.addEventListener('click', () => {
+  if (shiny) {
+    shinyEl.classList.add('hide');
+	spriteEl.classList.remove('hide')
+    shiny = false;
+  } else {
+    shinyEl.classList.remove('hide');
+	spriteEl.classList.add('hide')
+    shiny = true;
   }
 });
 

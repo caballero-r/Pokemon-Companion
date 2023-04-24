@@ -81,6 +81,13 @@ ul {
 	filter: drop-shadow(5px 5px 5px #222);
 }
 
+#poke-sprite-shiny {
+	width: 350px;
+	height: 350px;
+	-webkit-filter: drop-shadow(5px 5px 5px #222);
+	filter: drop-shadow(5px 5px 5px #222);
+}
+
 
 .site-description img {
 	z-index: -1;
@@ -100,5 +107,15 @@ ul {
 
 .hide {
 	display: none;
+}
+
+.sprites {
+	position: relative;
+}
+
+#shinyToggle {
+	position: absolute;
+	bottom: 5px;
+	left: 5px;
 }
 
