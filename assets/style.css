@@ -73,8 +73,7 @@ ul {
 
 /* This section deals with the container when the search button is clicked */
 
-#poke-sprite,
-.site-description img {
+#poke-sprite {
 	width: 350px;
 	height: 350px;
 	-webkit-filter: drop-shadow(5px 5px 5px #222);
@@ -90,8 +89,12 @@ ul {
 
 
 .site-description img {
+	width: 30%;
+	height: auto;
 	z-index: -1;
 	position: relative;
+	-webkit-filter: drop-shadow(5px 5px 5px #222);
+	filter: drop-shadow(5px 5px 5px #222);
 }
 
 #music {
@@ -115,7 +118,14 @@ ul {
 
 #shinyToggle {
 	position: absolute;
-	bottom: 5px;
-	left: 5px;
+	border-radius: 5px;
+	bottom: 6px;
+	left: 6px;
 }
+
+#shinyToggle img {
+	width: 45px;
+	height: 45px;
+}
+
 
