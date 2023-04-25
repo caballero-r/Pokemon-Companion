@@ -35,7 +35,7 @@ Given I am using Pokemon Companion to learn more about specific Pokemon
 - Then a responsive display will generate
 
 ## Live URL
-
+https://caballero-r.github.io/Pokemon-Companion/
 
 <img src="assets/images/Preview of Pokemon Companion.html.png" width=500 height=800 alt="preview of pokémon companion">
 
