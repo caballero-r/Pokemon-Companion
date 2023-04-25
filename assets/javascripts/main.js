@@ -18,7 +18,7 @@ var musicButton = document.getElementById('music');
 var shinyToggle = document.getElementById('shinyToggle');
 var musicPlayer = document.getElementById('player');
 var historyBtn = document.querySelector('#history');
-
+var lastKey = ''
 //get existing history element
 var pastSearches = [];
 var pastSearchesEl = document.getElementById("history");
@@ -41,25 +41,28 @@ pastSearchesEl.addEventListener("click", function (event) {
     recallPokemon(index);
   }
 });
-
 //Return  'Please enter the name of a Pokemon.' if leave empty
-buttonEl.addEventListener('click', function () {
-  siteDescEl.classList.add('hide');
-  pokeInfoEl.classList.remove('hide');
-  pokemon = searchEl.value.toLowerCase().trim()
-  if (pokemon === '') {
+buttonEl.addEventListener("click", function () {
+  pokemon = searchEl.value.toLowerCase().trim();
+  if (pokemon === "") {
     resetToDefaultPage();
-    alert('Please enter the name of a Pokemon.')
+    displayErrorMessage("Please enter the name of a Pokemon.");
     return;
   }
-  displayPastSearches();
   getPokemon(pokemon)
-})
+    .then(() => {
+      siteDescEl.classList.add("hide");
+      pokeInfoEl.classList.remove("hide");
+    })
+    .catch((error) => {
+      displayErrorMessage(error.message);
+    });
+});
 function addToSearchHistory(pokemon) {
   // Check if the Pokemon already exists in the search history
   const pokemonExists = pastSearches.some(
-    (search) => search.toLowerCase() === pokemon.toLowerCase()
-  );
+    (search) => search.toLowerCase() === pokemon.toLowerCase(),
+  )
   // If the Pokemon does not exist in the search history, add it
   if (!pokemonExists) {
     pastSearches.push(pokemon);
@@ -79,7 +82,7 @@ function resetToDefaultPage() {
 }
 // Return 'Pokemon does not exist.' if no response match
 function getPokemon(poke) {
-  fetch(`https://pokeapi.co/api/v2/pokemon/${poke}/`)
+  return fetch(`https://pokeapi.co/api/v2/pokemon/${poke}/`)
     .then((response) => {
       if (!response.ok) {
         throw new Error("Pokemon does not exist.");
@@ -90,15 +93,19 @@ function getPokemon(poke) {
       attacksEl.innerHTML = "";
       var pokeName = data.name;
       pokemonEl.textContent = capitalizeFirstLetter(pokeName);
-      spriteEl.setAttribute("src", data.sprites.other['official-artwork'].front_default);
-	  shinyEl.setAttribute("src", data.sprites.other['official-artwork'].front_shiny);
+      spriteEl.setAttribute(
+        "src",
+        data.sprites.other["official-artwork"].front_default
+      );
+      shinyEl.setAttribute(
+        "src",
+        data.sprites.other["official-artwork"].front_shiny
+      );
       populateMoveList(data);
       populateEvolutionChart(data);
       addToSearchHistory(pokemon);
       populateDesc(data);
-    })
-    .catch((error) => {
-      alert(error.message);
+      localStorage.setItem(data.id, pokeName);
     });
 }
 //get existing history element
@@ -112,6 +119,7 @@ function displayPastSearches() {
     pastSearchesEl.appendChild(pastSearchItem);
   });
 }
+
 historyBtn.addEventListener('click', showHistory);
 function showHistory() {
   const searchHistory = JSON.parse(localStorage.getItem('searchHistory'));
@@ -201,16 +209,15 @@ randoEl.addEventListener("click", function () {
       var pokeName = data.name;
       pokemonEl.textContent = capitalizeFirstLetter(pokeName);
     spriteEl.setAttribute("src", data.sprites.other['official-artwork'].front_default);
-	shinyEl.setAttribute("src", data.sprites.other['official-artwork'].front_shiny);
+  shinyEl.setAttribute("src", data.sprites.other['official-artwork'].front_shiny);
      populateMoveList(data);
      populateEvolutionChart(data);
      populateDesc(data);
     })
     .catch((error) => {
-      alert(error.message);
+    displayErrorMessage(error.message);
     });
 });
-
 // Toggle the music player from hide and show
 var isPlayerVisible = false;
 musicButton.addEventListener('click', () => {
@@ -222,22 +229,30 @@ musicButton.addEventListener('click', () => {
     isPlayerVisible = true;
   }
 });
-
 var shiny = false;
 shinyToggle.addEventListener('click', () => {
   if (shiny) {
     shinyEl.classList.add('hide');
-	spriteEl.classList.remove('hide');
+  spriteEl.classList.remove('hide');
     shiny = false;
-	shinyToggle.style.backgroundColor="white";
+  shinyToggle.style.backgroundColor="white";
   } else {
     shinyEl.classList.remove('hide');
-	spriteEl.classList.add('hide');
+  spriteEl.classList.add('hide');
     shiny = true;
-	shinyToggle.style.backgroundColor="#8eebfc";
+  shinyToggle.style.backgroundColor="#8EEBFC";
   }
 });
-
+//Getting error message
+function displayErrorMessage(message) {
+  const errorMessage = document.createElement("div");
+  errorMessage.classList.add("error-message");
+  errorMessage.textContent = message;
+  document.body.appendChild(errorMessage);
+  setTimeout(() => {
+    errorMessage.remove();
+  }, 3000);
+}
 // Function created to have the first letter of the string as an upper case letter
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
